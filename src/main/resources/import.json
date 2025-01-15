@@ -1,0 +1,541 @@
+[
+    {
+        "disciplineName": "Algorytmy tekstowe",
+        "content": "Ile razy wzorzec \"ma\" występuje w tekście: \"Ala ma kota, a kot ma Alę\"?",
+        "type": "SINGLE_CHOICE",
+        "correctAnswers": [
+            "3"
+        ],
+        "incorrectAnswers": [
+            "1",
+            "2",
+            "4"
+        ]
+    },
+    {
+        "disciplineName": "Algorytmy tekstowe",
+        "content": "Który algorytm wyszukiwania danych w tekście porównuje znaki od końca wzorca?",
+        "type": "SINGLE_CHOICE",
+        "correctAnswers": [
+            "Algorytm Boyer-Moore"
+        ],
+        "incorrectAnswers": [
+            "Naiwne wyszukiwanie",
+            "Algorytm KMP",
+            "Algorytm Rabin-Karp"
+        ]
+    },
+    {
+        "disciplineName": "Sortowanie",
+        "content": "Jaka jest złożoność czasowa algorytmu Heapsort w najgorszym przypadku?",
+        "type": "SINGLE_CHOICE",
+        "correctAnswers": [
+            "O(n log n)"
+        ],
+        "incorrectAnswers": [
+            "O(n)",
+            "O(n²)",
+            "O(log n)"
+        ]
+    },
+    {
+        "disciplineName": "Sortowanie",
+        "content": "Który algorytm sortowania może działać w najgorszym przypadku złożonością O(n²)?",
+        "type": "SINGLE_CHOICE",
+        "correctAnswers": [
+            "Quicksort (przy złym wyborze pivota)"
+        ],
+        "incorrectAnswers": [
+            "Heapsort",
+            "Mergesort",
+            "Bubble Sort"
+        ]
+    },
+    {
+        "disciplineName": "Struktury danych",
+        "content": "Jakie jest główne ryzyko korzystania z klasycznego BST (Binary Search Tree)?",
+        "type": "SINGLE_CHOICE",
+        "correctAnswers": [
+            "Niezrównoważone drzewo o złożoności O(n)"
+        ],
+        "incorrectAnswers": [
+            "Zbyt mała liczba węzłów",
+            "Problemy z wyszukiwaniem",
+            "Brak możliwości usuwania elementów"
+        ]
+    },
+    {
+        "disciplineName": "Struktury danych",
+        "content": "Która struktura drzewa jest automatycznie balansowana po każdej operacji?",
+        "type": "SINGLE_CHOICE",
+        "correctAnswers": [
+            "Drzewo AVL"
+        ],
+        "incorrectAnswers": [
+            "Klasyczne BST",
+            "Drzewo binarne",
+            "Drzewo Trie"
+        ]
+    },
+    {
+        "disciplineName": "Struktury danych",
+        "content": "Jaka jest podstawowa cecha kolejek priorytetowych?",
+        "type": "SINGLE_CHOICE",
+        "correctAnswers": [
+            "Element o najwyższym priorytecie jest przetwarzany pierwszy"
+        ],
+        "incorrectAnswers": [
+            "Kolejność FIFO",
+            "Brak kolejek z priorytetami",
+            "Elementy są przetwarzane losowo"
+        ]
+    },
+    {
+        "disciplineName": "Struktury danych",
+        "content": "Która struktura danych najczęściej implementuje kolejki priorytetowe?",
+        "type": "SINGLE_CHOICE",
+        "correctAnswers": [
+            "Kopiec (Heap)"
+        ],
+        "incorrectAnswers": [
+            "Lista posortowana",
+            "Tablica",
+            "Drzewo AVL"
+        ]
+    },
+    {
+        "disciplineName": "Struktury danych",
+        "content": "Jaką metodę wykorzystuje adresowanie otwarte w tablicach haszujących?",
+        "type": "SINGLE_CHOICE",
+        "correctAnswers": [
+            "Przeszukiwanie wolnych miejsc w tablicy"
+        ],
+        "incorrectAnswers": [
+            "Łańcuchowanie",
+            "Dynamiczne rozmiary tablicy",
+            "Wykorzystanie drzewa AVL"
+        ]
+    },
+    {
+        "disciplineName": "Struktury danych",
+        "content": "Która technika haszowania pozwala na zmniejszenie kolizji w tablicach haszujących?",
+        "type": "SINGLE_CHOICE",
+        "correctAnswers": [
+            "Podwójne haszowanie"
+        ],
+        "incorrectAnswers": [
+            "Łańcuchowanie",
+            "Adresowanie otwarte",
+            "Proste dzielenie"
+        ]
+    },
+    {
+        "disciplineName": "Architektura komputerów",
+        "content": "Który rodzaj pamięci jest najszybszy w hierarchii pamięci komputerowej?",
+        "type": "SINGLE_CHOICE",
+        "correctAnswers": [
+            "Rejestry"
+        ],
+        "incorrectAnswers": [
+            "Pamięć podręczna",
+            "RAM",
+            "Pamięć masowa"
+        ]
+    },
+    {
+        "disciplineName": "Architektura komputerów",
+        "content": "Co określa proces technologiczny mikroprocesora?",
+        "type": "SINGLE_CHOICE",
+        "correctAnswers": [
+            "Rozmiar tranzystorów na chipie (w nanometrach)"
+        ],
+        "incorrectAnswers": [
+            "Maksymalną częstotliwość taktowania",
+            "Maksymalną liczbę rdzeni",
+            "Typ obsługiwanej pamięci RAM"
+        ]
+    },
+    {
+        "disciplineName": "Architektura komputerów",
+        "content": "Która technologia pamięci masowej oferuje najwyższą szybkość zapisu i odczytu?",
+        "type": "SINGLE_CHOICE",
+        "correctAnswers": [
+            "NVMe"
+        ],
+        "incorrectAnswers": [
+            "HDD",
+            "SSD SATA",
+            "Pamięć optyczna"
+        ]
+    },
+    {
+        "disciplineName": "Architektura komputerów",
+        "content": "Która cecha pamięci masowej jest kluczowa przy archiwizacji danych?",
+        "type": "SINGLE_CHOICE",
+        "correctAnswers": [
+            "Trwałość danych"
+        ],
+        "incorrectAnswers": [
+            "Przepustowość",
+            "Niski czas dostępu",
+            "Obsługa wielu użytkowników jednocześnie"
+        ]
+    },
+    {
+        "disciplineName": "Architektura komputerów",
+        "content": "Jakie jest główne zadanie mostka południowego na płycie głównej?",
+        "type": "SINGLE_CHOICE",
+        "correctAnswers": [
+            "Zarządzanie wolniejszymi urządzeniami peryferyjnymi"
+        ],
+        "incorrectAnswers": [
+            "Obsługa procesora",
+            "Komunikacja z pamięcią RAM",
+            "Zarządzanie grafiką"
+        ]
+    },
+    {
+        "disciplineName": "Architektura komputerów",
+        "content": "Który format płyty głównej jest najczęściej używany w komputerach stacjonarnych?",
+        "type": "SINGLE_CHOICE",
+        "correctAnswers": [
+            "ATX"
+        ],
+        "incorrectAnswers": [
+            "Micro-ATX",
+            "Mini-ITX",
+            "E-ATX"
+        ]
+    },
+    {
+        "disciplineName": "Architektura komputerów",
+        "content": "Która architektura równoległa umożliwia wykonywanie różnych instrukcji na różnych zestawach danych?",
+        "type": "SINGLE_CHOICE",
+        "correctAnswers": [
+            "MIMD"
+        ],
+        "incorrectAnswers": [
+            "SISD",
+            "SIMD",
+            "MISD"
+        ]
+    },
+    {
+        "disciplineName": "Architektura komputerów",
+        "content": "Jaki model pamięci pozwala procesorom współdzielić pamięć w systemach równoległych?",
+        "type": "SINGLE_CHOICE",
+        "correctAnswers": [
+            "Shared Memory"
+        ],
+        "incorrectAnswers": [
+            "Distributed Memory",
+            "Hybrid Memory",
+            "Dedicated Memory"
+        ]
+    },
+    {
+        "disciplineName": "Architektura komputerów",
+        "content": "Jak nazywa się protokół synchronizujący pamięci podręczne w procesorach wielordzeniowych?",
+        "type": "SINGLE_CHOICE",
+        "correctAnswers": [
+            "MESI"
+        ],
+        "incorrectAnswers": [
+            "TCP",
+            "HTTP",
+            "SMP"
+        ]
+    },
+    {
+        "disciplineName": "Architektura komputerów",
+        "content": "Który interfejs pozwala na komunikację bezprzewodową na krótkim dystansie?",
+        "type": "SINGLE_CHOICE",
+        "correctAnswers": [
+            "Bluetooth"
+        ],
+        "incorrectAnswers": [
+            "Wi-Fi",
+            "Ethernet",
+            "NFC"
+        ]
+    },
+    {
+        "disciplineName": "Analiza danych",
+        "content": "Który parametr opisuje centralną tendencję danych?",
+        "type": "SINGLE_CHOICE",
+        "correctAnswers": [
+            "Średnia arytmetyczna"
+        ],
+        "incorrectAnswers": [
+            "Odchylenie standardowe",
+            "Wariancja",
+            "Rozstęp"
+        ]
+    },
+    {
+        "disciplineName": "Analiza danych",
+        "content": "Który parametr mierzy, jak bardzo dane są rozproszone wokół średniej?",
+        "type": "SINGLE_CHOICE",
+        "correctAnswers": [
+            "Odchylenie standardowe"
+        ],
+        "incorrectAnswers": [
+            "Średnia arytmetyczna",
+            "Mediana",
+            "Rozstęp"
+        ]
+    }
+,    
+{
+    "disciplineName": "Analiza danych",
+    "content": "Co oznacza wartość oczekiwana zmiennej losowej?",
+    "type": "SINGLE_CHOICE",
+    "correctAnswers": [
+        "Średnią wartość zmiennej losowej w długim okresie"
+    ],
+    "incorrectAnswers": [
+        "Międzykwartylowy rozstęp",
+        "Odchylenie standardowe zmiennej losowej",
+        "Minimalną wartość zmiennej losowej"
+    ]
+}
+,
+{
+    "disciplineName": "Analiza danych",
+    "content": "Który wzór przedstawia odchylenie standardowe?",
+    "type": "SINGLE_CHOICE",
+    "correctAnswers": [
+        "Pierwiastek kwadratowy z wariancji"
+    ],
+    "incorrectAnswers": [
+        "Suma wartości zmiennej losowej",
+        "Kwadrat wartości oczekiwanej",
+        "Wartość oczekiwana zmiennej losowej"
+    ]
+},
+{
+    "disciplineName": "Analiza danych",
+    "content": "Jakie wartości w rozkładzie normalnym są sobie równe?",
+    "type": "SINGLE_CHOICE",
+    "correctAnswers": [
+        "Średnia, mediana i moda"
+    ],
+    "incorrectAnswers": [
+        "Średnia i wariancja",
+        "Odchylenie standardowe i mediana",
+        "Moda i rozstęp"
+    ]
+}
+,
+{
+    "disciplineName": "Analiza danych",
+    "content": "Jaki procent danych mieści się w jednym odchyleniu standardowym w rozkładzie normalnym?",
+    "type": "SINGLE_CHOICE",
+    "correctAnswers": [
+        "68%"
+    ],
+    "incorrectAnswers": [
+        "95%",
+        "99,7%",
+        "50%"
+    ]
+}
+,
+{
+    "disciplineName": "Analiza danych",
+    "content": "Który współczynnik mierzy liniową zależność między dwiema zmiennymi ilościowymi?",
+    "type": "SINGLE_CHOICE",
+    "correctAnswers": [
+        "Współczynnik korelacji Pearsona"
+    ],
+    "incorrectAnswers": [
+        "Odchylenie standardowe",
+        "Wariancja",
+        "Kwartyle"
+    ]
+}
+,
+{
+    "disciplineName": "Analiza danych",
+    "content": "Jak nazywa się graficzne przedstawienie zależności między dwiema zmiennymi ilościowymi?",
+    "type": "SINGLE_CHOICE",
+    "correctAnswers": [
+        "Wykres rozrzutu"
+    ],
+    "incorrectAnswers": [
+        "Histogram",
+        "Wykres pudełkowy",
+        "Diagram kołowy"
+    ]
+}
+,
+{
+    "disciplineName": "Analiza danych",
+    "content": "Co oznacza p-value w testowaniu hipotez?",
+    "type": "SINGLE_CHOICE",
+    "correctAnswers": [
+        "Prawdopodobieństwo uzyskania tak ekstremalnego wyniku, zakładając, że H₀ jest prawdziwa"
+    ],
+    "incorrectAnswers": [
+        "Poziom istotności testu",
+        "Średnią wartość w próbie",
+        "Wynik testu t-Studenta"
+    ]
+}
+,
+{
+    "disciplineName": "Analiza danych",
+    "content": "Jeśli wartość p-value wynosi 0.03 przy poziomie istotności 0.05, co należy zrobić?",
+    "type": "SINGLE_CHOICE",
+    "correctAnswers": [
+        "Odrzucić hipotezę zerową"
+    ],
+    "incorrectAnswers": [
+        "Nie odrzucać hipotezy zerowej",
+        "Obniżyć poziom istotności",
+        "Zwiększyć rozmiar próby"
+    ]
+},
+{
+    "disciplineName": "Logika obliczeniowa",
+    "content": "Która metoda minimalizacji funkcji logicznych wykorzystuje graficzną reprezentację?",
+    "type": "SINGLE_CHOICE",
+    "correctAnswers": [
+        "Tablice Karnaugha"
+    ],
+    "incorrectAnswers": [
+        "Algorytm Quine’a-McCluskeya",
+        "Metoda Petricka",
+        "Algorytm Rabin-Karp"
+    ]
+}
+,
+{
+    "disciplineName": "Logika obliczeniowa",
+    "content": "Dlaczego stosuje się minimalizację funkcji logicznych?",
+    "type": "SINGLE_CHOICE",
+    "correctAnswers": [
+        "Aby zmniejszyć liczbę bramek logicznych w układzie"
+    ],
+    "incorrectAnswers": [
+        "Aby zwiększyć złożoność obliczeniową",
+        "Aby poprawić czytelność kodu źródłowego",
+        "Aby zwiększyć liczbę zmiennych w funkcji"
+    ]
+}
+,
+{
+    "disciplineName": "Logika obliczeniowa",
+    "content": "Czym są diagramy BDD?",
+    "type": "SINGLE_CHOICE",
+    "correctAnswers": [
+        "Graficzną reprezentacją funkcji logicznych w postaci drzewa decyzyjnego"
+    ],
+    "incorrectAnswers": [
+        "Algorytmem minimalizującym funkcje logiczne",
+        "Reprezentacją wykresów czasowych układów logicznych",
+        "Systemem kodowania funkcji logicznych"
+    ]
+}
+,
+{
+    "disciplineName": "Logika obliczeniowa",
+    "content": "Do czego służą diagramy BDD?",
+    "type": "SINGLE_CHOICE",
+    "correctAnswers": [
+        "Do minimalizacji i analizy funkcji logicznych"
+    ],
+    "incorrectAnswers": [
+        "Do projektowania obwodów analogowych",
+        "Do analizy statystycznej danych",
+        "Do weryfikacji graficznych interfejsów użytkownika"
+    ]
+}
+,
+{
+    "disciplineName": "Logika obliczeniowa",
+    "content": "Która heurystyka jest kluczowa dla zmniejszenia rozmiaru diagramu ROBDD?",
+    "type": "SINGLE_CHOICE",
+    "correctAnswers": [
+        "Optymalizacja porządku zmiennych"
+    ],
+    "incorrectAnswers": [
+        "Eliminacja zmiennych węzłowych",
+        "Analiza graficzna wyników",
+        "Stosowanie funkcji losowych"
+    ]
+}
+,
+
+{
+    "disciplineName": "Logika obliczeniowa",
+    "content": "Co daje stosowanie heurystyk w tworzeniu diagramów ROBDD?",
+    "type": "SINGLE_CHOICE",
+    "correctAnswers": [
+        "Zmniejszenie liczby węzłów i poprawę wydajności"
+    ],
+    "incorrectAnswers": [
+        "Zwiększenie rozmiaru diagramu",
+        "Skalowanie funkcji do wyższych wymiarów",
+        "Losową optymalizację zmiennych"
+    ]
+}
+,
+{
+    "disciplineName": "Logika obliczeniowa",
+    "content": "Jakie badanie pozwala sprawdzić, czy formuła logiczna jest zawsze prawdziwa?",
+    "type": "SINGLE_CHOICE",
+    "correctAnswers": [
+        "Dowodzenie tautologii"
+    ],
+    "incorrectAnswers": [
+        "Sprawdzanie spełnialności",
+        "Analiza niespójności",
+        "Minimalizacja formuły logicznej"
+    ]
+}
+,
+{
+    "disciplineName": "Logika obliczeniowa",
+    "content": "Jakie badanie pozwala sprawdzić, czy formuła logiczna ma przynajmniej jedno poprawne przypisanie zmiennych?",
+    "type": "SINGLE_CHOICE",
+    "correctAnswers": [
+        "Sprawdzanie spełnialności (SAT)"
+    ],
+    "incorrectAnswers": [
+        "Dowodzenie tautologii",
+        "Generowanie kontrprzykładów",
+        "Analiza równoważności"
+    ]
+}
+,
+{
+    "disciplineName": "Logika obliczeniowa",
+    "content": "Która właściwość relacji oznacza, że każdy element ma relację sam ze sobą?",
+    "type": "SINGLE_CHOICE",
+    "correctAnswers": [
+        "Zwrotność"
+    ],
+    "incorrectAnswers": [
+        "Symetryczność",
+        "Przechodniość",
+        "Antysymetryczność"
+    ]
+}
+,
+{
+    "disciplineName": "Logika obliczeniowa",
+    "content": "Która właściwość relacji oznacza, że jeśli a ma relację z b, a b ma relację z c, to a ma relację z c?",
+    "type": "SINGLE_CHOICE",
+    "correctAnswers": [
+        "Przechodniość"
+    ],
+    "incorrectAnswers": [
+        "Zwrotność",
+        "Symetryczność",
+        "Funkcjonalność"
+    ]
+}
+
+
+]

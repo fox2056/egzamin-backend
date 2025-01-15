@@ -1,0 +1,31 @@
+POST http://localhost:8080/api/questions/import
+Content-Type: application/json
+
+[
+    {
+        "disciplineName": "Algorytmy tekstowe",
+        "content": "Który algorytm wyszukiwania danych w tekście porównuje znaki od końca wzorca?",
+        "type": "SINGLE_CHOICE",
+        "correctAnswers": [
+            "Algorytm Boyer-Moore"
+        ],
+        "incorrectAnswers": [
+            "Naiwne wyszukiwanie",
+            "Algorytm KMP",
+            "Algorytm Rabin-Karp"
+        ]
+    },
+    {
+        "disciplineName": "Algorytmy tekstowe",
+        "content": "Funkcja „failure function" jest wykorzystywana w:",
+        "type": "SINGLE_CHOICE",
+        "correctAnswers": [
+            "Algorytmie KMP"
+        ],
+        "incorrectAnswers": [
+            "Naiwnym wyszukiwaniu",
+            "Algorytmie Rabin-Karp",
+            "Algorytmie Boyer-Moore"
+        ]
+    }
+] 
