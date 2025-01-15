@@ -7,6 +7,9 @@ import pl.sliepov.egzamin.domain.model.test.TestStatus;
 import pl.sliepov.egzamin.domain.port.out.QuestionRepository;
 import pl.sliepov.egzamin.domain.port.out.TestRepository;
 import pl.sliepov.egzamin.infrastructure.web.test.TestAnswerDto;
+import pl.sliepov.egzamin.infrastructure.web.test.dto.TestResultDto;
+import pl.sliepov.egzamin.infrastructure.web.test.dto.QuestionResultDto;
+import pl.sliepov.egzamin.domain.model.question.QuestionType;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -165,37 +168,56 @@ public class ManageTestsService {
         return shuffled.subList(0, count);
     }
 
-    public Test submitAnswers(Long testId, List<TestAnswerDto> answers) {
+    public TestResultDto submitAnswers(Long testId, List<TestAnswerDto> answers) {
         Test test = testRepository.findById(testId);
         if (test.getStatus() != TestStatus.IN_PROGRESS) {
             throw new IllegalStateException("Test nie jest w trakcie");
         }
 
-        // Pobierz pytania i ich poprawne odpowiedzi
+        // Pobierz pytania
         Map<Long, Question> questions = answers.stream()
                 .map(a -> questionRepository.findById(a.questionId()))
                 .collect(Collectors.toMap(Question::getId, q -> q));
 
+        // Sprawdź każde pytanie
+        List<QuestionResultDto> questionResults = answers.stream()
+                .map(answer -> {
+                    Question question = questions.get(answer.questionId());
+                    boolean isCorrect = isAnswerCorrect(question, answer.selectedAnswers());
+                    return new QuestionResultDto(
+                            question.getId(),
+                            question.getContent(),
+                            question.getCorrectAnswers(),
+                            answer.selectedAnswers(),
+                            isCorrect);
+                })
+                .collect(Collectors.toList());
+
         // Oblicz wynik
-        int score = calculateScore(answers, questions);
+        int correctAnswers = (int) questionResults.stream()
+                .filter(QuestionResultDto::isCorrect)
+                .count();
+        int score = (correctAnswers * 100) / answers.size();
 
         // Zakończ test
-        return completeTest(testId, score);
-    }
+        completeTest(testId, score);
 
-    private int calculateScore(List<TestAnswerDto> answers, Map<Long, Question> questions) {
-        int correctAnswers = 0;
-        for (TestAnswerDto answer : answers) {
-            Question question = questions.get(answer.questionId());
-            if (isAnswerCorrect(question, answer.selectedAnswers())) {
-                correctAnswers++;
-            }
-        }
-        return (correctAnswers * 100) / answers.size(); // Wynik w procentach
+        return new TestResultDto(
+                score,
+                answers.size(),
+                correctAnswers,
+                questionResults);
     }
 
     private boolean isAnswerCorrect(Question question, List<String> selectedAnswers) {
-        return question.getCorrectAnswers().containsAll(selectedAnswers) &&
-                selectedAnswers.containsAll(question.getCorrectAnswers());
+        if (question.getType() == QuestionType.SINGLE_CHOICE) {
+            // Dla pytań jednokrotnego wyboru musi być dokładnie jedna odpowiedź
+            return selectedAnswers.size() == 1 &&
+                    question.getCorrectAnswers().containsAll(selectedAnswers);
+        } else {
+            // Dla pytań wielokrotnego wyboru wszystkie odpowiedzi muszą być poprawne
+            return question.getCorrectAnswers().containsAll(selectedAnswers) &&
+                    selectedAnswers.containsAll(question.getCorrectAnswers());
+        }
     }
 }

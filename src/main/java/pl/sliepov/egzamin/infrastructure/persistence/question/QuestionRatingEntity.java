@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import pl.sliepov.egzamin.domain.model.question.QuestionRating;
 
 @Entity
-@Table(name = "question_rating")
+@Table(name = "question_ratings")
 @NoArgsConstructor
 @Getter
 public class QuestionRatingEntity {
@@ -15,8 +15,8 @@ public class QuestionRatingEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "question_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "question_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, foreignKeyDefinition = "FOREIGN KEY (question_id) REFERENCES question(id) ON DELETE CASCADE"))
     private QuestionEntity question;
 
     private boolean isPositive;

@@ -4,9 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface SpringDataQuestionRatingRepository extends JpaRepository<QuestionRatingEntity, Long> {
-    List<QuestionRatingEntity> findByQuestion(QuestionEntity question);
+    List<QuestionRatingEntity> findByQuestionId(Long questionId);
 
-    long countByQuestionAndIsPositiveTrue(QuestionEntity question);
+    long countByQuestionIdAndIsPositive(Long questionId, boolean isPositive);
 
-    long countByQuestionAndIsPositiveFalse(QuestionEntity question);
+    void deleteAllByQuestionId(Long questionId);
 }

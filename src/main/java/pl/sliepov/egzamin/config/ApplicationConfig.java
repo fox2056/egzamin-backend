@@ -6,17 +6,26 @@ import pl.sliepov.egzamin.application.usecase.discipline.ManageDisciplinesServic
 import pl.sliepov.egzamin.application.usecase.question.ManageQuestionsService;
 import pl.sliepov.egzamin.domain.port.out.DisciplineRepository;
 import pl.sliepov.egzamin.domain.port.out.QuestionRepository;
+import pl.sliepov.egzamin.domain.port.out.QuestionRatingRepository;
 
 @Configuration
 public class ApplicationConfig {
 
     @Bean
-    public ManageDisciplinesService manageDisciplinesService(DisciplineRepository disciplineRepository) {
-        return new ManageDisciplinesService(disciplineRepository);
+    public ManageDisciplinesService manageDisciplinesService(
+            DisciplineRepository disciplineRepository,
+            QuestionRepository questionRepository) {
+        return new ManageDisciplinesService(disciplineRepository, questionRepository);
     }
 
     @Bean
-    public ManageQuestionsService manageQuestionsService(QuestionRepository questionRepository) {
-        return new ManageQuestionsService(questionRepository);
+    public ManageQuestionsService manageQuestionsService(
+            QuestionRepository questionRepository,
+            QuestionRatingRepository questionRatingRepository,
+            DisciplineRepository disciplineRepository) {
+        return new ManageQuestionsService(
+                questionRepository,
+                questionRatingRepository,
+                disciplineRepository);
     }
 }

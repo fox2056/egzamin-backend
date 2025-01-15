@@ -25,19 +25,22 @@ public class QuestionEntity {
     @Enumerated(EnumType.STRING)
     private QuestionType type;
 
-    @ElementCollection
-    @CollectionTable(name = "question_correct_answers", joinColumns = @JoinColumn(name = "question_id"))
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "question_correct_answers", joinColumns = @JoinColumn(name = "question_id"), foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
     @Column(name = "answer")
     private List<String> correctAnswers = new ArrayList<>();
 
-    @ElementCollection
-    @CollectionTable(name = "question_incorrect_answers", joinColumns = @JoinColumn(name = "question_id"))
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "question_incorrect_answers", joinColumns = @JoinColumn(name = "question_id"), foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
     @Column(name = "answer")
     private List<String> incorrectAnswers = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "discipline_id")
     private DisciplineEntity discipline;
+
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<QuestionRatingEntity> ratings = new ArrayList<>();
 
     public Question toDomain() {
         return new Question(

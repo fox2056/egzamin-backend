@@ -7,6 +7,9 @@ import pl.sliepov.egzamin.application.usecase.test.ManageTestsService;
 import pl.sliepov.egzamin.application.usecase.test.TestQuestionsResult;
 import pl.sliepov.egzamin.domain.model.question.Question;
 import pl.sliepov.egzamin.domain.model.test.Test;
+import pl.sliepov.egzamin.infrastructure.web.test.dto.TestQuestionDto;
+import pl.sliepov.egzamin.infrastructure.web.test.dto.TestQuestionsResponse;
+import pl.sliepov.egzamin.infrastructure.web.test.dto.TestResultDto;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -48,8 +51,8 @@ public class TestController {
     public ResponseEntity<TestQuestionsResponse> getTestQuestions(@PathVariable Long id) {
         TestQuestionsResult result = testService.getQuestionsForTest(id);
 
-        List<QuestionDto> questionDtos = result.questions().stream()
-                .map(this::toQuestionDto)
+        List<TestQuestionDto> questionDtos = result.questions().stream()
+                .map(TestQuestionDto::fromQuestion)
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(new TestQuestionsResponse(
@@ -59,11 +62,11 @@ public class TestController {
     }
 
     @PostMapping("/{id}/submit")
-    public ResponseEntity<Test> submitTest(
+    public ResponseEntity<TestResultDto> submitTest(
             @PathVariable Long id,
             @RequestBody List<TestAnswerDto> answers) {
-        Test completedTest = testService.submitAnswers(id, answers);
-        return ResponseEntity.ok(completedTest);
+        TestResultDto result = testService.submitAnswers(id, answers);
+        return ResponseEntity.ok(result);
     }
 
     private QuestionDto toQuestionDto(Question question) {

@@ -11,4 +11,6 @@ public interface QuestionRatingRepository {
     long countPositiveRatingsByQuestionId(Long questionId);
 
     long countNegativeRatingsByQuestionId(Long questionId);
+
+    void deleteAllByQuestionId(Long questionId);
 }

@@ -4,9 +4,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.sliepov.egzamin.application.usecase.question.ManageQuestionsService;
 import pl.sliepov.egzamin.domain.model.question.Question;
+import pl.sliepov.egzamin.infrastructure.web.question.dto.DeleteQuestionResponseDto;
+import pl.sliepov.egzamin.infrastructure.web.question.dto.QuestionWithRatingDto;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/questions")
@@ -18,52 +19,45 @@ public class QuestionController {
     }
 
     @PostMapping
-    public ResponseEntity<QuestionDto> createQuestion(@RequestBody QuestionDto questionDto) {
+    public ResponseEntity<QuestionWithRatingDto> createQuestion(@RequestBody QuestionDto questionDto) {
         Question question = manageQuestionsService.createQuestion(
                 questionDto.content(),
                 questionDto.type(),
                 questionDto.correctAnswers(),
                 questionDto.incorrectAnswers(),
                 questionDto.disciplineId());
-        return ResponseEntity.ok(toDto(question));
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<QuestionDto> getQuestion(@PathVariable Long id) {
-        Question question = manageQuestionsService.getQuestion(id);
-        return ResponseEntity.ok(toDto(question));
+        return ResponseEntity.ok(manageQuestionsService.getQuestionWithRatings(question.getId()));
     }
 
     @GetMapping("/discipline/{disciplineId}")
-    public ResponseEntity<List<QuestionDto>> getQuestionsByDiscipline(@PathVariable Long disciplineId) {
+    public ResponseEntity<List<QuestionWithRatingDto>> getQuestionsByDiscipline(@PathVariable Long disciplineId) {
         List<Question> questions = manageQuestionsService.getQuestionsByDiscipline(disciplineId);
-        List<QuestionDto> dtos = questions.stream()
-                .map(this::toDto)
-                .collect(Collectors.toList());
+        List<QuestionWithRatingDto> dtos = questions.stream()
+                .map(q -> manageQuestionsService.getQuestionWithRatings(q.getId()))
+                .toList();
         return ResponseEntity.ok(dtos);
     }
 
     @PatchMapping("/{questionId}/discipline")
-    public ResponseEntity<QuestionDto> changeQuestionDiscipline(
+    public ResponseEntity<QuestionWithRatingDto> changeQuestionDiscipline(
             @PathVariable Long questionId,
             @RequestParam Long newDisciplineId) {
         Question updatedQuestion = manageQuestionsService.changeQuestionDiscipline(questionId, newDisciplineId);
-        return ResponseEntity.ok(toDto(updatedQuestion));
+        return ResponseEntity.ok(manageQuestionsService.getQuestionWithRatings(updatedQuestion.getId()));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteQuestion(@PathVariable Long id) {
+    public ResponseEntity<DeleteQuestionResponseDto> deleteQuestion(@PathVariable Long id) {
         manageQuestionsService.deleteQuestion(id);
-        return ResponseEntity.noContent().build();
+        DeleteQuestionResponseDto response = new DeleteQuestionResponseDto(
+                id,
+                "Pytanie zostało pomyślnie usunięte",
+                true);
+        return ResponseEntity.ok(response);
     }
 
-    private QuestionDto toDto(Question question) {
-        return new QuestionDto(
-                question.getId(),
-                question.getContent(),
-                question.getType(),
-                question.getCorrectAnswers(),
-                question.getIncorrectAnswers(),
-                question.getDisciplineId());
+    @GetMapping("/{id}")
+    public ResponseEntity<QuestionWithRatingDto> getQuestion(@PathVariable Long id) {
+        return ResponseEntity.ok(manageQuestionsService.getQuestionWithRatings(id));
     }
 }

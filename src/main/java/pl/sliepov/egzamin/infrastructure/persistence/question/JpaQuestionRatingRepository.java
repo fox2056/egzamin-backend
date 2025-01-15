@@ -3,6 +3,7 @@ package pl.sliepov.egzamin.infrastructure.persistence.question;
 import org.springframework.stereotype.Repository;
 import pl.sliepov.egzamin.domain.model.question.QuestionRating;
 import pl.sliepov.egzamin.domain.port.out.QuestionRatingRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,25 +31,24 @@ public class JpaQuestionRatingRepository implements QuestionRatingRepository {
 
     @Override
     public List<QuestionRating> findByQuestionId(Long questionId) {
-        QuestionEntity question = questionRepository.findById(questionId)
-                .orElseThrow(() -> new RuntimeException("Question not found"));
-
-        return ratingRepository.findByQuestion(question).stream()
+        return ratingRepository.findByQuestionId(questionId).stream()
                 .map(QuestionRatingEntity::toDomain)
                 .collect(Collectors.toList());
     }
 
     @Override
     public long countPositiveRatingsByQuestionId(Long questionId) {
-        QuestionEntity question = questionRepository.findById(questionId)
-                .orElseThrow(() -> new RuntimeException("Question not found"));
-        return ratingRepository.countByQuestionAndIsPositiveTrue(question);
+        return ratingRepository.countByQuestionIdAndIsPositive(questionId, true);
     }
 
     @Override
     public long countNegativeRatingsByQuestionId(Long questionId) {
-        QuestionEntity question = questionRepository.findById(questionId)
-                .orElseThrow(() -> new RuntimeException("Question not found"));
-        return ratingRepository.countByQuestionAndIsPositiveFalse(question);
+        return ratingRepository.countByQuestionIdAndIsPositive(questionId, false);
+    }
+
+    @Override
+    @Transactional
+    public void deleteAllByQuestionId(Long questionId) {
+        ratingRepository.deleteAllByQuestionId(questionId);
     }
 }

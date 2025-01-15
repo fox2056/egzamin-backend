@@ -1,139 +1,96 @@
 # System Egzaminacyjny
 
-System do zarządzania pytaniami egzaminacyjnymi z różnych dyscyplin.
+System do zarządzania pytaniami egzaminacyjnymi i przeprowadzania testów.
 
 ## Funkcjonalności
 
-- Zarządzanie dyscyplinami (przedmiotami)
-- Zarządzanie pytaniami (dodawanie, usuwanie, modyfikacja)
-- Import pytań z pliku JSON
-- Obsługa pytań jednokrotnego i wielokrotnego wyboru
-- System oceniania pytań (łapka w górę/dół)
-- System testów z automatycznym sprawdzaniem
-- Losowy wybór pytań z zachowaniem proporcji między dyscyplinami
+### Zarządzanie Pytaniami
 
-## Endpointy API
+- Tworzenie pytań jednokrotnego i wielokrotnego wyboru
+- Edycja i usuwanie pytań
+- Automatyczne usuwanie pustych dyscyplin po usunięciu ostatniego pytania
+- System oceniania pytań (pozytywne/negatywne) z komentarzami
 
-### Pytania
+### Zarządzanie Dyscyplinami
 
-- `POST /api/questions/import` - import pytań z pliku JSON
-  - Content-Type: `multipart/form-data`
-  - Parametr: `file` - plik JSON z pytaniami
-- `GET /api/questions/{id}` - pobranie pojedynczego pytania
-- `GET /api/questions/discipline/{disciplineId}` - pobranie wszystkich pytań z danej dyscypliny
-- `DELETE /api/questions/{id}` - usunięcie pytania
-- `PATCH /api/questions/{questionId}/discipline?newDisciplineId={id}` - zmiana dyscypliny pytania
-
-### Dyscypliny
-
-- `GET /api/disciplines` - lista wszystkich dyscyplin
-- `GET /api/disciplines/{id}` - pobranie pojedynczej dyscypliny
-- `DELETE /api/disciplines/{id}` - usunięcie dyscypliny
-
-### Oceny pytań
-
-- `POST /api/questions/{questionId}/ratings?isPositive={true/false}&comment={text}` - dodanie oceny pytania
-- `GET /api/questions/{questionId}/ratings/stats` - pobranie statystyk ocen pytania
+- Tworzenie i edycja dyscyplin
+- Usuwanie dyscyplin
+- Łączenie dyscyplin wraz z przenoszeniem pytań
 
 ### Testy
 
-- `POST /api/tests` - rozpoczęcie nowego testu
-- `GET /api/tests/student/{email}` - pobranie historii testów studenta
-- `GET /api/tests/{id}` - pobranie szczegółów testu
-- `GET /api/tests/{id}/questions` - pobranie pytań dla testu
-- `POST /api/tests/{id}/submit` - przesłanie odpowiedzi i zakończenie testu
+- Generowanie testów z wybranych dyscyplin
+- Wykluczanie wybranych dyscyplin z testu
+- Zapisywanie wyników testów
+- Statystyki testów
 
-## Formaty danych
+## API Endpoints
 
-### Format pliku do importu pytań (JSON)
+### Pytania
 
-```json
-[
-  {
-    "disciplineName": "Algorytmy tekstowe",
-    "content": "Który algorytm wyszukiwania danych w tekście porównuje znaki od końca wzorca?",
-    "type": "SINGLE_CHOICE",
-    "correctAnswers": ["Algorytm Boyer-Moore"],
-    "incorrectAnswers": [
-      "Naiwne wyszukiwanie",
-      "Algorytm KMP",
-      "Algorytm Rabin-Karp"
-    ]
-  }
-]
+```http
+POST   /api/questions                     # Tworzenie pytania
+GET    /api/questions/{id}                # Pobieranie pytania z ocenami
+GET    /api/questions/discipline/{id}     # Lista pytań z dyscypliny (z ocenami)
+PATCH  /api/questions/{id}/discipline     # Zmiana dyscypliny pytania
+DELETE /api/questions/{id}                # Usuwanie pytania
+
+# Oceny pytań
+POST   /api/questions/{id}/ratings        # Dodawanie oceny
+GET    /api/questions/{id}/ratings/stats  # Statystyki ocen
 ```
 
-### Format rozpoczęcia testu
+### Dyscypliny
+
+```http
+POST   /api/disciplines                   # Tworzenie dyscypliny
+GET    /api/disciplines                   # Lista dyscyplin
+GET    /api/disciplines/{id}              # Szczegóły dyscypliny
+PATCH  /api/disciplines/{id}              # Aktualizacja dyscypliny
+DELETE /api/disciplines/{id}              # Usuwanie dyscypliny
+POST   /api/disciplines/{sourceId}/merge/{targetId}  # Łączenie dyscyplin
+```
+
+### Testy
+
+```http
+POST   /api/tests                         # Tworzenie testu
+GET    /api/tests/{id}                    # Pobieranie testu
+POST   /api/tests/{id}/submit            # Przesyłanie odpowiedzi
+GET    /api/tests/student/{email}        # Historia testów studenta
+```
+
+## Przykłady Użycia
+
+### Ocenianie Pytania
 
 ```json
+POST /api/questions/1/ratings?isPositive=true
 {
-  "studentName": "Jan Kowalski",
-  "studentEmail": "jan.kowalski@example.com",
-  "includedDisciplineIds": [1, 2, 3],
-  "excludedDisciplineIds": [4, 5],
-  "numberOfQuestions": 10
+    "comment": "Bardzo dobre pytanie"
 }
 ```
 
-### Format odpowiedzi dla pytań testu
+### Łączenie Dyscyplin
 
-```json
-{
-  "questions": [
-    {
-      "id": 1,
-      "content": "Treść pytania",
-      "type": "SINGLE_CHOICE",
-      "correctAnswers": ["Odpowiedź A"],
-      "incorrectAnswers": ["Odpowiedź B", "Odpowiedź C"],
-      "disciplineId": 1
-    }
-  ],
-  "message": "Uwaga: Dostępnych jest tylko 8 pytań z wybranych dyscyplin, zamiast żądanych 10 pytań.",
-  "hasWarning": true
-}
+```http
+POST /api/disciplines/1/merge/2
 ```
 
-### Format przesyłania odpowiedzi testu
+Przenosi wszystkie pytania z dyscypliny o ID=1 do dyscypliny o ID=2 i usuwa pierwszą dyscyplinę.
 
-```json
-[
-  {
-    "questionId": 1,
-    "selectedAnswers": ["Odpowiedź A"]
-  },
-  {
-    "questionId": 2,
-    "selectedAnswers": ["Odpowiedź B", "Odpowiedź C"]
-  }
-]
-```
+## Technologie
 
-## Uruchomienie
-
-1. Wymagania:
-
-   - Java 23
-   - Gradle
-   - Mysql
-
-2. Konfiguracja:
-
-   - Ustaw zmienne środowiskowe:
-     - `DB_URL` - URL do bazy danych
-     - `DB_USER` - nazwa użytkownika bazy danych
-     - `DB_PASSWORD` - hasło do bazy danych
-
-3. Uruchomienie aplikacji:
-
-```bash
-./gradlew bootRun
-```
-
-## Szczegóły implementacji
-
-- Architektura heksagonalna (ports & adapters)
-- Domain-Driven Design (DDD)
+- Java 23
 - Spring Boot 3.x
 - Spring Data JPA
-- Mysql
+- H2/MySQL
+- Gradle
+
+## 👥 Autorzy
+
+- Oleksii Sliepov
+
+## 📄 Licencja
+
+Ten projekt jest licencjonowany na warunkach [MIT License](LICENSE).

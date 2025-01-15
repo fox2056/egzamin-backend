@@ -2,6 +2,7 @@ package pl.sliepov.egzamin.infrastructure.persistence.test;
 
 import org.springframework.stereotype.Repository;
 import pl.sliepov.egzamin.domain.model.test.Test;
+import pl.sliepov.egzamin.domain.model.test.TestStatus;
 import pl.sliepov.egzamin.domain.port.out.TestRepository;
 
 import java.util.List;
@@ -34,5 +35,10 @@ public class JpaTestRepository implements TestRepository {
         return testRepository.findByStudentEmail(email).stream()
                 .map(TestEntity::toDomain)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public long countByStatus(TestStatus status) {
+        return testRepository.countByStatus(TestEntity.StatusEntity.fromDomain(status));
     }
 }

@@ -35,14 +35,14 @@ public class TestEntity {
     private Integer score;
 
     @Enumerated(EnumType.STRING)
-    private TestStatus status;
+    private StatusEntity status;
 
     private Integer numberOfQuestions;
 
     public Test toDomain() {
         return new Test(id, studentName, studentEmail,
                 includedDisciplineIds, excludedDisciplineIds,
-                startTime, endTime, score, status, numberOfQuestions);
+                startTime, endTime, score, status.toDomain(), numberOfQuestions);
     }
 
     public static TestEntity fromDomain(Test test) {
@@ -55,8 +55,20 @@ public class TestEntity {
         entity.startTime = test.getStartTime();
         entity.endTime = test.getEndTime();
         entity.score = test.getScore();
-        entity.status = test.getStatus();
+        entity.status = StatusEntity.fromDomain(test.getStatus());
         entity.numberOfQuestions = test.getNumberOfQuestions();
         return entity;
+    }
+
+    public enum StatusEntity {
+        IN_PROGRESS, COMPLETED, CANCELLED;
+
+        public static StatusEntity fromDomain(TestStatus status) {
+            return StatusEntity.valueOf(status.name());
+        }
+
+        public TestStatus toDomain() {
+            return TestStatus.valueOf(this.name());
+        }
     }
 }
