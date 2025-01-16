@@ -54,7 +54,7 @@ jobs:
           path: build/libs
 
       - name: Debug downloaded artifact
-        run: ls -l /home/runner/work/egzaminator-backend/egzaminator-backend
+        run: ls -l /home/runner/work/
 
       - name: Set up SSH
         run: |
