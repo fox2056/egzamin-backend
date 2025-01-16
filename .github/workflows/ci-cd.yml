@@ -54,7 +54,7 @@ jobs:
           path: build/libs
 
       - name: Debug downloaded artifact
-        run: ls -l /home/runner/work/
+        run: ls -l /home/runner/work/egzamin-backend/egzamin-backend/
 
       - name: Set up SSH
         run: |
@@ -75,7 +75,7 @@ jobs:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: '23'
+          port: '22'
           source: build/libs/*.war
           target: /opt/tomcat/webapps/
           strip_components: 2
