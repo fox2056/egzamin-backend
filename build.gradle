@@ -38,7 +38,7 @@ dependencies {
 }
 
 bootWar {
-	archiveFileName = "egzaminator.war"
+	archiveFileName = "egzaminator-backend.war"
 }
 
 tasks.named('test') {
