@@ -41,6 +41,9 @@ dependencies {
 bootWar {
 	archiveFileName = "egzaminator-backend.war"
 	mainClass = 'pl.sliepov.egzamin.EgzaminApplication'
+	properties([
+		'metaInf.resources.excludes': ['**/META-INF/*.tld']
+	])
 }
 
 tasks.named('test') {
