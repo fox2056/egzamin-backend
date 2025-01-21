@@ -83,6 +83,5 @@ jobs:
       - name: Restart Tomcat
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} <<EOF
-          sudo /opt/tomcat/bin/shutdown.sh
-          sudo /opt/tomcat/bin/startup.sh
+          sudo systemctl restart tomcat.service
           EOF
