@@ -25,7 +25,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .exposedHeaders("Set-Cookie");
 
         registry.addMapping(contextPath + "/actuator/**")
-                .allowedOrigins(frontendUrl)
+                .allowedOrigins("*")
                 .allowedMethods("GET")
                 .allowedHeaders("*")
                 .allowCredentials(true);
