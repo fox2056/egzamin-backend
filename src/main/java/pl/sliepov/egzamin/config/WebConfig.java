@@ -20,7 +20,7 @@ public class WebConfig {
         // Konfiguracja CORS dla API
         CorsConfiguration apiCorsConfig = new CorsConfiguration();
         apiCorsConfig.setAllowCredentials(true);
-        apiCorsConfig.addAllowedOrigin(frontendUrl);
+        apiCorsConfig.addAllowedOrigin("*");
         apiCorsConfig.addAllowedHeader("*");
         apiCorsConfig.addAllowedMethod("*");
         apiCorsConfig.addExposedHeader("Content-Disposition");

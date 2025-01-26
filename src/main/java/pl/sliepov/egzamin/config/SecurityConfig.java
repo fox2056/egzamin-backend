@@ -20,6 +20,9 @@ public class SecurityConfig {
         @Value("${server.servlet.context-path:/egzaminator-backend}")
         private String contextPath;
 
+        @Value("${app.frontend.url}")
+        private String frontendUrl;
+
         private final OAuth2UserService<OAuth2UserRequest, OAuth2User> oauth2UserService;
 
         public SecurityConfig(OAuth2UserService<OAuth2UserRequest, OAuth2User> oauth2UserService) {
@@ -33,28 +36,25 @@ public class SecurityConfig {
                                 .csrf(csrf -> csrf.disable())
                                 .authorizeHttpRequests(auth -> auth
                                                 .requestMatchers(
-                                                                new AntPathRequestMatcher(contextPath + "/"),
-                                                                new AntPathRequestMatcher(contextPath + "/error"),
-                                                                new AntPathRequestMatcher(contextPath + "/api/auth/**"))
+                                                                new AntPathRequestMatcher("/"),
+                                                                new AntPathRequestMatcher("/error"),
+                                                                new AntPathRequestMatcher("/api/auth/**"),
+                                                                new AntPathRequestMatcher("/actuator/health/**"))
                                                 .permitAll()
-                                                .requestMatchers(new AntPathRequestMatcher(
-                                                                contextPath + "/actuator/health/**"))
-                                                .permitAll()
-                                                .requestMatchers(
-                                                                new AntPathRequestMatcher(contextPath + "/actuator/**"))
+                                                .requestMatchers(new AntPathRequestMatcher("/actuator/**"))
                                                 .hasRole("ADMIN")
                                                 .anyRequest()
                                                 .authenticated())
                                 .oauth2Login(oauth2 -> oauth2
                                                 .userInfoEndpoint(userInfo -> userInfo
                                                                 .userService(oauth2UserService))
-                                                .defaultSuccessUrl(System.getenv("EGZAMINATOR_FRONT_END_URL"), true))
+                                                .defaultSuccessUrl(frontendUrl, true))
                                 .exceptionHandling(e -> e
                                                 .authenticationEntryPoint(
                                                                 new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
                                 .logout(logout -> logout
                                                 .logoutUrl("/api/auth/logout")
-                                                .logoutSuccessUrl(System.getenv("EGZAMINATOR_FRONT_END_URL"))
+                                                .logoutSuccessUrl(frontendUrl)
                                                 .clearAuthentication(true)
                                                 .invalidateHttpSession(true)
                                                 .permitAll());
